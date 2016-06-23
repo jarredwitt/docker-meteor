@@ -9,7 +9,7 @@ RUN apt-get update
 RUN apt-get install -y git curl python
 
 # Install latest Node from nodesource
-RUN curl https://deb.nodesource.com/setup_0.10 | sh
+RUN curl https://deb.nodesource.com/setup | sh
 RUN apt-get install -y nodejs
 
 # Make sure we have a directory for the application
