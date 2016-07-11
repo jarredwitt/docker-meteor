@@ -94,13 +94,19 @@ fi
 # subdirectory (default)
 if [ -d ${APP_DIR}/bundle ]; then
    APP_DIR=${APP_DIR}/bundle
+else
+	tar xf ${APP_DIR}/bundle.tar.gz --no-same-owner -C ${APP_DIR}
 fi
 
 # Install NPM modules
 if [ -e ${APP_DIR}/programs/server ]; then
    echo "Installing NPM prerequisites..."
+   rm -r -f ${APP_DIR}/programs/server/npm/node_modules/meteor/npm-bcrypt/node_modules/bcrypt
+   cd ${APP_DIR}/programs/server/npm/node_modules/meteor/npm-bcrypt
+   npm install bcrypt
    pushd ${APP_DIR}/programs/server/
    npm install
+   npm install regenerator aws-sdk capitalize lodash uuid
    popd
 else
    echo "Unable to locate server directory; hold on: we're likely to fail"
@@ -108,5 +114,6 @@ fi
 
 # Run meteor
 cd ${APP_DIR}
+cat /etc/hosts
 echo "Starting Meteor..."
 exec node ./main.js
