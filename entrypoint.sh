@@ -106,7 +106,6 @@ if [ -e ${APP_DIR}/programs/server ]; then
    npm install bcrypt
    pushd ${APP_DIR}/programs/server/
    npm install
-   npm install regenerator aws-sdk capitalize lodash uuid
    popd
 else
    echo "Unable to locate server directory; hold on: we're likely to fail"
